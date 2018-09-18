@@ -13,7 +13,96 @@
 #define LT_LFN  LT(LY_LFN, KC_TAB) 
 #define LT_RFN  LT(LY_LFN, KC_TAB) 
 
-#define JP_PLUS S()
+#define JP_PLUS S(KC_SCLN)
+
+#define TD_LKKO TD(TD_LKAKKO) // (<[{(((...
+#define TD_RKKO TD(TD_RKAKKO) // (<[{(((...
+
+
+enum {
+    TD_LKAKKO = 0,
+    TD_RKAKKO = 1,
+};
+
+void dance_lkakko_finished (qk_tap_dance_state_t *state, void *user_data) {
+    
+    if(state->count == 2) {
+        register_code(KC_LSFT);
+        register_code(KC_COMM);
+    } else 
+    if(state->count == 3) {
+        register_code(KC_RBRC);  
+    } else 
+    if(state->count == 4) {
+        register_code(KC_LSFT);
+        register_code(KC_RBRC);  
+    } else {
+        // 1
+        register_code(KC_LSFT);
+        register_code(KC_8);
+    }
+}
+
+void dance_lkakko_reset (qk_tap_dance_state_t *state, void *user_data) {
+    
+    if(state->count == 2) {
+        unregister_code(KC_LSFT);
+        unregister_code(KC_COMM);
+    } else 
+    if(state->count == 3) {
+        unregister_code(KC_RBRC);  
+    } else 
+    if(state->count == 4) {
+        unregister_code(KC_LSFT);
+        unregister_code(KC_RBRC);  
+    } else {
+        unregister_code(KC_LSFT);
+        unregister_code(KC_8);
+    }
+}
+
+void dance_rkakko_finished (qk_tap_dance_state_t *state, void *user_data) {
+    
+    if(state->count == 2) {
+        register_code(KC_LSFT);
+        register_code(KC_DOT);
+    } else 
+    if(state->count == 3) {
+        register_code(KC_BSLS);  
+    } else 
+    if(state->count == 4) {
+        register_code(KC_LSFT);
+        register_code(KC_BSLS);  
+    } else {
+        // 1
+        register_code(KC_LSFT);
+        register_code(KC_9);
+    }
+}
+
+void dance_rkakko_reset (qk_tap_dance_state_t *state, void *user_data) {
+    
+    if(state->count == 2) {
+        unregister_code(KC_LSFT);
+        unregister_code(KC_DOT);
+    } else 
+    if(state->count == 3) {
+        unregister_code(KC_BSLS);  
+    } else 
+    if(state->count == 4) {
+        unregister_code(KC_LSFT);
+        unregister_code(KC_BSLS);  
+    } else {
+        unregister_code(KC_LSFT);
+        unregister_code(KC_9);
+    }
+}
+
+qk_tap_dance_action_t tap_dance_actions[]= {
+    [TD_LKAKKO] = ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_lkakko_finished, dance_lkakko_reset )
+    ,[TD_RKAKKO]= ACTION_TAP_DANCE_FN_ADVANCED(NULL, dance_rkakko_finished, dance_rkakko_reset )
+};
+
 
 /* Layer 0: HHKB JP
  * ,-----------------------------------------------------------.
@@ -54,8 +143,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [LY_SPC] = LAYOUT_JP(
         KC_ESC,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_MINS, KC_EQL,  KC_JYEN, KC_BSPC,
         _______, _______, _______, KC_END,  _______, _______, KC_HOME, KC_PGDN, KC_PGUP, _______, KC_PSCR, KC_LBRC, KC_RBRC,
-        KC_LCTL, KC_HOME, KC_SPC,  KC_DEL,  _______, _______, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_END,  KC_QUOT, KC_BSLS, KC_ENT,
-        KC_LSFT, _______, _______, _______, _______, KC_BSPC, KC_ENT,  _______, KC_COMM, KC_DOT,  KC_SLSH, KC_RO,   KC_UP,   KC_RSFT,
+        KC_LCTL, KC_HOME, KC_SPC,  KC_DEL,  _______, TD_LKKO, KC_LEFT, KC_DOWN, KC_UP,   KC_RGHT, KC_END,  KC_QUOT, KC_BSLS, KC_ENT,
+        KC_LSFT, _______, _______, _______, _______, TD_RKKO, KC_ENT,  _______, KC_COMM, KC_DOT,  KC_SLSH, KC_RO,   KC_UP,   KC_RSFT,
         _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, KC_LEFT, KC_DOWN, KC_RGHT),
 
     [LY_TAB] = LAYOUT_JP(

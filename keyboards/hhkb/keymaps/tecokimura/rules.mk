@@ -1,1 +1,3 @@
 OPT_DEFS += -DHHKB_JP
+
+TAP_DANCE_ENABLE = yes
