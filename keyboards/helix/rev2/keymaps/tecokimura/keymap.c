@@ -38,6 +38,7 @@ enum layer_number {
   _LOWER,
   _RAISE,
   _ADJUST,
+  _RFN,
 };
 
 enum custom_keycodes {
@@ -45,6 +46,7 @@ enum custom_keycodes {
   LOWER,
   RAISE,
   ADJUST,
+  RFN,
   EISU,
   #ifdef KANA_ENABLE
   KANA,
@@ -92,10 +94,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_BASE] = LAYOUT( \
     KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
-    KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    JP_ATBQ, \
+    LT_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    JP_ATBQ, \
     KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, JP_CLAS, \
     KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    ADJUST,  EISU,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, JP_BSUS, \
-    LOWER,   KC_LALT, KC_LGUI, KC_LCTL, KC_BSPC, KC_SPC,  KC_ENT,  RAISE,   KC_SPC,  KC_ENT,  KC_APP,  XXXXXXX, XXXXXXX, KC_RSFT  \
+    LOWER,   KC_LALT, KC_LGUI, KC_LCTL, KC_BSPC, KC_SPC,  KC_ENT,  RAISE,   LT_SPC,  KC_ENT,  KC_APP,  RFN,     XXXXXXX, KC_RSFT  \
     ),
 
   /* Lower JIS Normal
@@ -142,6 +144,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   /* Adjust (Lower + Raise) Common map for Normal and Exchange
    * ,-----------------------------------------.             ,-----------------------------------------.
+   * |  ESC |      |      |      |      | Bksp |             |      |      |      |  -=  |  ^~  |  \|  |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * |   (  |   )  |   /  |   7  |   8  |   9  |             |WheelL|WheelD|WheelU|WheelR|  @`  |  [{  |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * |   [  |   ]  |   *  |   4  |   5  |   6  |             |MouseL|MouseD|MouseU|MouseR|  :*  |  ]}  |
+   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
+   * |   {  |   }  |   -  |   1  |   2  |   3  |  Tab |      |Click1|Click2|Click3|Click4|Click5|  \_  |
+   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
+   * |      |      |   +  |   0  |   ,  |   .  | Enter|      |      |      |      |      |      |      |
+   * `-------------------------------------------------------------------------------------------------'
+   */
+  [_ADJUST] =  LAYOUT( \
+    KC_ESC,  _______, _______,   _______, _______, KC_BSPC,                 XXXXXXX, XXXXXXX, XXXXXXX, KC_MINS, JP_CFTD, JP_BSVL, \
+    KC_LPRN, KC_RPRN, KC_SLSH,   KC_7,    KC_8,    KC_9,                    KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, JP_ATBQ, JP_LBRC, \
+    JP_LBRC, JP_RBRC, KC_ASTR,   KC_4,    KC_5,    KC_6,                    KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, JP_CLAS, JP_RBRC, \
+    KC_LCBR, KC_RCBR, KC_MINS,   KC_1,    KC_2,    KC_3,   KC_TAB, XXXXXXX, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_BTN5, JP_BSUS, \
+    _______, _______, KC_PLUS,   KC_0,    KC_COMM, KC_DOT, KC_ENT, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  \
+    ),
+
+  /* _RFN Common map for Normal and Exchange
+   * ,-----------------------------------------.             ,-----------------------------------------.
    * |Reset |      |RGBRST|Aud on|Audoff|      |             |      | Reset|RGBRST|Aud on|Audoff|      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * |      |ModNrm|ModExc| Mac  | Win  |      |             |      |ModNrm|ModExc| Mac  | Win  |      |
@@ -153,9 +176,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
-  [_ADJUST] =  LAYOUT( \
+  [_RFN] =  LAYOUT( \
     RESET,   XXXXXXX, RGBRST,  AU_ON,   AU_OFF,  XXXXXXX,                   XXXXXXX, RESET,   RGBRST,  AU_ON,   AU_OFF,  XXXXXXX, \
-    XXXXXXX, BASE,    XXXXXXX,   AG_NORM, AG_SWAP, XXXXXXX,                   XXXXXXX, BASE,    XXXXXXX,   AG_NORM, AG_SWAP, XXXXXXX, \
+    XXXXXXX, BASE,    XXXXXXX, AG_NORM, AG_SWAP, XXXXXXX,                   XXXXXXX, BASE,    XXXXXXX,   AG_NORM, AG_SWAP, XXXXXXX, \
     XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX,                   XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, \
     XXXXXXX, RGB_SMOD,RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_SMOD,RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
