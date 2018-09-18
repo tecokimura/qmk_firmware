@@ -35,21 +35,15 @@ extern uint8_t is_master;
 // entirely and just use numbers.
 enum layer_number {
   _BASE = 0,
-  _BAS_E,
   _LOWER,
-  _LOW_E,
   _RAISE,
-  _RAI_E,
   _ADJUST,
 };
 
 enum custom_keycodes {
   BASE = SAFE_RANGE,
-  BAS_E,
   LOWER,
-  LOW_E,
   RAISE,
-  RAI_E,
   ADJUST,
   EISU,
   #ifdef KANA_ENABLE
@@ -76,6 +70,9 @@ enum custom_keycodes {
 #define MAC_IMEON     LCTL(LSFT(KC_J))    // OS X. IME ON
 #define MAC_HEN_EISU  LCTL(KC_SCLN)       // OS X. IME Henkan Eisu
 
+#define LT_SPC  LT(RAISE,  KC_SPC)
+#define LT_TAB  LT(ADJUST, KC_TAB)
+#define LT_LFN  LT(LOWER,  KC_ESC)
 
 
 #if HELIX_ROWS == 5
@@ -128,7 +125,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * |  F7  |  F8  |  F9  |  F10 |  F11 | F12  |             | Home |PageDn|PageUp| End  |      |      |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |      |Space | Del  |      |      |             | Left | Down |  Up  | Right|      |      |
+   * |      |HOME  |Space | Del  |      |      |             | Left | Down |  Up  | Right|      |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
    * |      |MsBtn1|MsBtn2|      |      |      |      |      |      |IME ON|IMEOFF|      | MsUp |      |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
@@ -138,7 +135,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_RAISE] = LAYOUT( \
     KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     _______, XXXXXXX,    XXXXXXX,   XXXXXXX,      XXXXXXX, KC_DEL,  \
     KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,                    KC_HOME, KC_PGDN,    KC_PGUP,   KC_END,       _______, KC_BSPC, \
-    KC_LCTL, XXXXXXX, KC_SPC,  KC_DEL,  XXXXXXX, XXXXXXX,                   KC_LEFT, KC_DOWN,    KC_UP,     KC_RIGHT,     XXXXXXX, KC_ENT, \
+    KC_LCTL, KC_HOME, KC_SPC,  KC_DEL,  XXXXXXX, XXXXXXX,                   KC_LEFT, KC_DOWN,    KC_UP,     KC_RIGHT,     XXXXXXX, KC_ENT, \
     _______, KC_BTN1, KC_BTN2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MAC_IMEOFF, MAC_IMEON, MAC_HEN_EISU, KC_MS_U, XXXXXXX, \
     _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX,    XXXXXXX,   KC_MS_L,      KC_MS_D, KC_MS_R  \
     ),
@@ -158,73 +155,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    */
   [_ADJUST] =  LAYOUT( \
     RESET,   XXXXXXX, RGBRST,  AU_ON,   AU_OFF,  XXXXXXX,                   XXXXXXX, RESET,   RGBRST,  AU_ON,   AU_OFF,  XXXXXXX, \
-    XXXXXXX, BASE,    BAS_E,   AG_NORM, AG_SWAP, XXXXXXX,                   XXXXXXX, BASE,    BAS_E,   AG_NORM, AG_SWAP, XXXXXXX, \
+    XXXXXXX, BASE,    XXXXXXX,   AG_NORM, AG_SWAP, XXXXXXX,                   XXXXXXX, BASE,    XXXXXXX,   AG_NORM, AG_SWAP, XXXXXXX, \
     XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX,                   XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, \
     XXXXXXX, RGB_SMOD,RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_SMOD,RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
-    ),
-
-  /* Qwerty JIS Exchange L and R
-   * ,-----------------------------------------.             ,-----------------------------------------.
-   * |  6&  |  7'  |  8(  |  9)  |   0  |  -=  |             | Esc  |  1!  |  2"  |  3#  |  4$  |  5%  |
-   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |   Y  |   U  |   I  |   O  |   P  |  @`  |             | Tab  |   Q  |   W  |   E  |   R  |   T  |
-   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |   H  |   J  |   K  |   L  |  ;+  |  :*  |             |      |   A  |   S  |   D  |   F  |   G  |
-   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * |   N  |   M  |  ,<  |  .>  |  /?  |  Up  |Enter |KANJI | Shift|   Z  |   X  |   C  |   V  |   B  |
-   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * |Space |Raise |  }]  | APP  | Left | Down |Right |Adjust| Ctrl | GUI  | Alt  |  [{  |Lower | Bksp |
-   * `-------------------------------------------------------------------------------------------------'
-   */
-  [_BAS_E] = LAYOUT( \
-    KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS,                   KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   \
-    KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    JP_ATBQ,                   KC_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,   \
-    KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, JP_CLAS,                   XXXXXXX, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,   \
-    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, KC_UP,   KC_ENT,  EISU,    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   \
-    KC_SPC,  RAI_E,   JP_RBRC, KC_APP,  KC_LEFT, KC_DOWN, KC_RGHT, ADJUST,  KC_LCTL, KC_LALT, KC_LGUI, JP_LBRC, LOW_E,   KC_BSPC \
-    ),
-
-  /* Lower JIS Exchange L and R
-   * ,-----------------------------------------.             ,-----------------------------------------.
-   * |      |      |      |  -=  |  ^~  |  \|  |             |      |      |      |      |      |      |
-   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |      |      |      |  @`  |  [{  |             |      |      |      |      |      |      |
-   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |      |      |  ;+  |  :*  |  ]}  |             |      |      |      |      |      |      |
-   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |  ,<  |  .>  |  /?  |  \_  |PageUp|      |      |      |      |      |      |      |      |
-   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |      |      | Home |PageDn| End  |      |      |      |      |      |      | Del  |
-   * `-------------------------------------------------------------------------------------------------'
-   */
-  [_LOW_E] = LAYOUT( \
-    _______, XXXXXXX, XXXXXXX, KC_MINS, JP_CFTD, JP_BSVL,                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    _______, XXXXXXX, XXXXXXX, XXXXXXX, JP_ATBQ, JP_LBRC,                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    _______, XXXXXXX, XXXXXXX, KC_SCLN, JP_CLAS, JP_RBRC,                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    _______, KC_COMM, KC_DOT,  KC_SLSH, JP_BSUS, KC_PGUP, XXXXXXX, XXXXXXX, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    _______, _______, XXXXXXX, _______, KC_HOME, KC_PGDN, KC_END,  _______, _______, _______, _______, XXXXXXX, _______, KC_DEL   \
-    ),
-
-  /* Raise JIS Exchange L and R
-   * ,-----------------------------------------.             ,-----------------------------------------.
-   * |  F7  |  F8  |  F9  |  F10 |  F11 | F12  |             |  F1  |  F2  |  F3  |  F4  |  F5  |  F6  |
-   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |      |      |      |      |      |             |      |      |      |      |      |      |
-   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |      |      |      |      |      |      |             |      |      |      |      |      |      |
-   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |      |      |      | MsUp |      |      |      |MsBtn1|MsBtn2|      |      |      |
-   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |      |      |MsLeft|MsDown|MsRght|      |      |      |      |      |      |      |
-   * `-------------------------------------------------------------------------------------------------'
-   */
-  [_RAI_E] = LAYOUT( \
-    KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,                    KC_F1  , KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                   _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, \
-    XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_MS_U, XXXXXXX, XXXXXXX, _______, KC_BTN1, KC_BTN2, XXXXXXX, XXXXXXX, XXXXXXX, \
-    _______, _______, XXXXXXX, _______, KC_MS_L, KC_MS_D, KC_MS_R, _______, _______, _______, _______, XXXXXXX, _______, XXXXXXX  \
     ),
 
 };
@@ -275,7 +209,7 @@ void toggle_lower_raise_layer(bool pressed, uint16_t dist_layer, uint16_t lower_
     if (!TOG_STATUS) { //TOG_STATUS checks is another reactive key currently pressed, only changes RGB mode if returns false
       TOG_STATUS = !TOG_STATUS;
       #ifdef RGBLIGHT_ENABLE
-        if (dist_layer == _LOWER || dist_layer == _LOW_E) {
+        if (dist_layer == _LOWER ) {
           rgblight_mode(16);
         } else {
           rgblight_mode(15);
@@ -310,29 +244,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
       }
       return false;
       break;
-    case BAS_E:
-      if (record->event.pressed) {
-        #ifdef AUDIO_ENABLE
-          PLAY_SONG(tone_qwerty);
-        #endif
-        persistent_default_layer_set(1UL<<_BAS_E);
-      }
-      return false;
-      break;
     case LOWER:
       toggle_lower_raise_layer(record->event.pressed, _LOWER, _LOWER, _RAISE);
       return false;
       break;
-    case LOW_E:
-      toggle_lower_raise_layer(record->event.pressed, _LOW_E, _LOW_E, _RAI_E);
-      return false;
-      break;
     case RAISE:
       toggle_lower_raise_layer(record->event.pressed, _RAISE, _LOWER, _RAISE);
-      return false;
-      break;
-    case RAI_E:
-      toggle_lower_raise_layer(record->event.pressed, _RAI_E, _LOW_E, _RAI_E);
       return false;
       break;
     case ADJUST:
@@ -463,9 +380,6 @@ void matrix_update(struct CharacterMatrix *dest,
 #define L_RAISE (1<<_RAISE)
 #define L_ADJUST (1<<_ADJUST)
 #define L_ADJUST_TRI (L_ADJUST|L_RAISE|L_LOWER)
-#define L_LOW_E (1<<_LOW_E)
-#define L_RAI_E (1<<_RAI_E)
-#define L_ADJUST_TRIE (L_ADJUST|L_RAI_E|L_LOW_E)
 
 static void render_logo(struct CharacterMatrix *matrix) {
 
@@ -499,27 +413,16 @@ void render_status(struct CharacterMatrix *matrix) {
   matrix_write_P(matrix, PSTR("\nLayer: "));
     switch (layer_state) {
       case L_BASE:
-        if (default_layer_state == (1UL<<_BAS_E)) {
-          matrix_write_P(matrix, PSTR("Base_Ex"));
-        } else {
-          matrix_write_P(matrix, PSTR("Base"));
-        }
+        matrix_write_P(matrix, PSTR("tecokimura"));
         break;
       case L_RAISE:
         matrix_write_P(matrix, PSTR("Raise"));
         break;
-      case L_RAI_E:
-        matrix_write_P(matrix, PSTR("Raise_Ex"));
-        break;
       case L_LOWER:
         matrix_write_P(matrix, PSTR("Lower"));
         break;
-      case L_LOW_E:
-        matrix_write_P(matrix, PSTR("Lower_Ex"));
-        break;
       case L_ADJUST:
       case L_ADJUST_TRI:
-      case L_ADJUST_TRIE:
         matrix_write_P(matrix, PSTR("Adjust"));
         break;
       default:
