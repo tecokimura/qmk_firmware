@@ -135,11 +135,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `-------------------------------------------------------------------------------------------------'
    */
   [_RAISE] = LAYOUT( \
-    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     _______, XXXXXXX,    XXXXXXX,   XXXXXXX,      XXXXXXX, KC_DEL,  \
-    KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,                    KC_HOME, KC_PGDN,    KC_PGUP,   KC_END,       _______, KC_BSPC, \
-    KC_LCTL, KC_HOME, KC_SPC,  KC_DEL,  XXXXXXX, XXXXXXX,                   KC_LEFT, KC_DOWN,    KC_UP,     KC_RIGHT,     XXXXXXX, KC_ENT, \
-    _______, KC_BTN1, KC_BTN2, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, MAC_IMEOFF, MAC_IMEON, MAC_HEN_EISU, KC_MS_U, XXXXXXX, \
-    _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX,    XXXXXXX,   KC_MS_L,      KC_MS_D, KC_MS_R  \
+    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     _______, XXXXXXX,      XXXXXXX,   XXXXXXX,    XXXXXXX, KC_DEL,  \
+    KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,                    KC_HOME, KC_PGDN,      KC_PGUP,   KC_END,     _______, KC_BSPC, \
+    KC_LCTL, KC_HOME, KC_SPC,  KC_DEL,  XXXXXXX, XXXXXXX,                   KC_LEFT, KC_DOWN,      KC_UP,     KC_RIGHT,   KC_END,  KC_ENT, \
+    _______, KC_BTN1, KC_BTN2, XXXXXXX, XXXXXXX, KC_BSPC, XXXXXXX, XXXXXXX, KC_ENT,  MAC_HEN_EISU, MAC_IMEON, MAC_IMEOFF, KC_MS_U, XXXXXXX, \
+    _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX,      XXXXXXX,   KC_MS_L,    KC_MS_D, KC_MS_R  \
     ),
 
   /* Adjust (Lower + Raise) Common map for Normal and Exchange
@@ -156,7 +156,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `-------------------------------------------------------------------------------------------------'
    */
   [_ADJUST] =  LAYOUT( \
-    KC_ESC,  _______, _______,   _______, _______, KC_BSPC,                 XXXXXXX, XXXXXXX, XXXXXXX, KC_MINS, JP_CFTD, JP_BSVL, \
+    RESET,   _______, _______,   _______, _______, KC_BSPC,                 XXXXXXX, XXXXXXX, XXXXXXX, KC_MINS, JP_CFTD, JP_BSVL, \
     KC_LPRN, KC_RPRN, KC_SLSH,   KC_7,    KC_8,    KC_9,                    KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, JP_ATBQ, JP_LBRC, \
     JP_LBRC, JP_RBRC, KC_ASTR,   KC_4,    KC_5,    KC_6,                    KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, JP_CLAS, JP_RBRC, \
     KC_LCBR, KC_RCBR, KC_MINS,   KC_1,    KC_2,    KC_3,   KC_TAB, XXXXXXX, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_BTN5, JP_BSUS, \
