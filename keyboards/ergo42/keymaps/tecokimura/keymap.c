@@ -78,34 +78,32 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |------+------+------+------+------+------+------|   |------|------+------+------+------+------+------|
    * | Sft  |      |      |      |      |      |  {   |   |  }   |      |      |   <  |   >  |   ?  |  \   |
    * |------+------+------+------+------+------+------|   |------+------+------+------+------+------+------|
-   * | Ctrl | GUI  |  App |PrtSc |ESC/  |Space/|Tab/  |   |Back  |Enter/| Del  |PrtSc |=>GAME|=>SYMB|  \   |
-   * |      |      |      |      |~SYMB |RCtrl |Shift |   |Space |~META |      |      |      |      |      |
+   * |      |      |      |      |      |      |      |   |      |Enter |      |      |      |   .  |      |
    * `------------------------------------------------'   `------------------------------------------------'
    */
   [LY_MOUSE] = LAYOUT( \
     _______, KC_BTN1, KC_BTN2, XXXXXXX, KC_TAB,  XXXXXXX, _______, _______, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, _______, _______, \
     KC_LCTL, KC_VOLU, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX, _______, _______, KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______, _______, \
-    KC_LSFT, S(KC_2), S(KC_3), S(KC_4), XXXXXXX, S(KC_6), _______, _______, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, _______, _______, \
+    KC_LSFT, _______, _______, _______, _______, _______, _______, _______, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, _______, _______, \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______ \
   ),
 
   /* LaYer NUMBER
    * ,------------------------------------------------.   ,------------------------------------------------.
-   * | Tab  |   Q  |   W  |   E  |   R  |   T  |  [   |   |  ]   |   Y  |   U  |   I  |   O  |   P  |  @   |
+   * | Tab  |      |      | Enter|      |      |      |   |      |      |   7  |   8  |   9  |   -  |  =   |
    * |------+------+------+------+------+------+------|   |-------------+------+------+------+------+------|
-   * | Alt  |   A  |   S  |   D  |   F  |   G  |  (   |   |  )   |   H  |   J  |   K  |   L  |   ;  |  :   |
+   * |      |      | Space|  Del |      |      |      |   |      | Bspc |   4  |   5  |   6  |   +  |  *   |
    * |------+------+------+------+------+------+------|   |------|------+------+------+------+------+------|
-   * | Sft  |   Z  |   X  |   C  |   V  |   B  |  {   |   |  }   |   N  |   M  |   ,  |   .  |   /  |\/Sft |
+   * |      | UNDO |  Cut | Copy | Paste| Bspc |      |   |      |   0  |   1  |   2  |   3  |   /  |\/Sft |
    * |------+------+------+------+------+------+------|   |------+------+------+------+------+------+------|
-   * | Ctrl | GUI  |  App |PrtSc | ESC  |Space |Tab   |   |Back  |Enter | Del  |PrtSc |=>GAME|=>SYMB|  \   |
-   * |      |      |      |      |      |      |      |   |Space |      |      |      |      |      |      |
+   * |      |      |      |      |      |      |      |   |      |Enter |      |      |      |   .  |      |
    * `------------------------------------------------'   `------------------------------------------------'
    */
   [LY_NUMBER] = LAYOUT( \
     KC_TAB,  _______, _______, KC_ENT,  _______, _______, _______,    _______,  _______, KC_7,    KC_8,    KC_9,    KC_MINS, KC_EQL,  \
     _______, _______, KC_SPC,  KC_DEL,  _______, _______, _______,    _______,  KC_BSPC, KC_4,    KC_5,    KC_6,    JP_PLUS, JP_ASTR, \
-    _______, KC_UNDO, KC_CUT,  KC_COPY, KC_PASTE,KC_BSPC, _______,    _______,  KC_0,    KC_1,    KC_2,    KC_3,    KC_DOT,  KC_SLSH, \
-    _______, _______, _______, _______, _______, _______, _______,    _______,  KC_ENT,  _______, _______, _______, _______, _______  \
+    _______, KC_UNDO, KC_CUT,  KC_COPY, KC_PASTE,KC_BSPC, _______,    _______,  KC_0,    KC_1,    KC_2,    KC_3,    KC_SLSH, _______,\
+    _______, _______, _______, _______, _______, _______, _______,    _______,  KC_ENT,  _______, _______, _______, KC_DOT,  _______  \
   ),
 
   /* LaYer FUNCtion
@@ -121,9 +119,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `------------------------------------------------'   `------------------------------------------------'
    */
   [LY_FUNC] = LAYOUT( \
-    S(KC_1), S(KC_2), S(KC_3), S(KC_4), S(KC_5), S(KC_6),  S(KC_7),    S(KC_8),    S(KC_9), S(KC_0), S(KC_MINS), S(KC_EQL),  S(KC_NUBS), S(KC_GRV), \
-    KC_LCTRL, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,      KC_F7,      KC_F8,   KC_F9,   KC_F10,     KC_F11,     KC_F12,     KC_LBRC, \
-    KC_LSFT,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    S(KC_RBRC), S(KC_BSLS), KC_N,    KC_M,    KC_COMM,    KC_DOT,     KC_SLSH,    SFT_T(KC_RO), \
+    S(KC_1),  S(KC_2), S(KC_3), S(KC_4), S(KC_5), S(KC_6),  S(KC_7),   S(KC_8),    S(KC_9), S(KC_0), S(KC_MINS), S(KC_EQL),  S(KC_NUBS), S(KC_GRV), \
+    KC_LCTRL, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,      KC_GRV,     _______, _______, _______,    _______,    _______,    _______, \
+    KC_LSFT,  KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,     S(KC_BSLS), KC_N,    KC_M,    KC_COMM,    _______,    _______,    SFT_T(KC_RO), \
     RESET,    KC_LGUI, KC_APP,  KC_PSCR, KC_ESC,  KC_SPC,  KC_TAB,     KC_BSPC,    KC_ENT,  KC_DELT, KC_PSCR,    _______,    _______,    _______ \
   )
 
