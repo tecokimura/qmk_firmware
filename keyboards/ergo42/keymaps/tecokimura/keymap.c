@@ -20,7 +20,7 @@ extern keymap_config_t keymap_config;
 
 #define LT_CRSR  LT(LY_CURSOR, KC_SPC)
 #define LT_MOUS  LT(LY_MOUSE,  KC_TAB) 
-#define LT_NUMB  LT(LY_NUMBER, _______) 
+#define LT_NUMB  LT(LY_NUMBER, KC_ESC) 
 #define LT_FUNC  LT(LY_FUNC,   _______) 
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -40,7 +40,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LT_MOUS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    KC_RBRC,       KC_BSLS,    KC_Y,   KC_U,    KC_I,     KC_O,     KC_P,     KC_LBRC, \
     KC_LCTRL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    S(KC_8),       S(KC_9),    KC_H,   KC_J,    KC_K,     KC_L,     KC_SCLN,  KC_QUOT, \
     KC_LSFT,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    S(KC_RBRC),    S(KC_BSLS), KC_N,   KC_M,    KC_COMM,  KC_DOT,   KC_SLSH,  KC_RSFT, \
-    LT_NUMB,  KC_APP,  KC_LGUI, KC_LALT, _______, KC_BSPC, LT_CRSR,       LT_CRSR,    KC_ENT, _______, _______,  _______,  _______,  LT_FUNC, \
+    LT_NUMB,  KC_APP,  KC_LGUI, KC_LALT, _______, KC_BSPC, LT_CRSR,       LT_CRSR,    KC_ENT, _______, _______,  _______,  _______,  LT_FUNC \
   ),
 
   /* LY_CURSOR
@@ -56,17 +56,18 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `------------------------------------------------'   `------------------------------------------------'
    */
   [LY_CURSOR] = LAYOUT( \
-//    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    _______, _______, KC_7,    KC_8,    KC_9,  KC_0,    KC_MINS, KC_EQL, \
-//    _______, KC_F1,   XXXXXXX, KC_MHEN, KC_HENK, XXXXXXX, _______, _______, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, XXXXXXX, XXXXXXX, \
-//    _______, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______, _______, KC_F7,   KC_F8,   KC_F9, KC_F10,  KC_F11,  SFT_T(KC_RO), \
-//    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET, _______, _______, _______ \
+/*
+    KC_1,    KC_2,    KC_3,    KC_4,    KC_5,    KC_6,    _______, _______, KC_7,    KC_8,    KC_9,  KC_0,    KC_MINS, KC_EQL, \
+    _______, KC_F1,   XXXXXXX, KC_MHEN, KC_HENK, XXXXXXX, _______, _______, KC_LEFT, KC_DOWN, KC_UP, KC_RGHT, XXXXXXX, XXXXXXX, \
+    _______, KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,   _______, _______, KC_F7,   KC_F8,   KC_F9, KC_F10,  KC_F11,  SFT_T(KC_RO), \
+    _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, RESET, _______, _______, _______ \
+*/
 
-    JP_ZHTG,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, KC_HOME, KC_MINS, \
+    _______,  _______, _______, _______, _______, _______, _______, _______, _______, _______, _______,  _______, KC_HOME, KC_MINS, \
     _______, _______, _______, KC_END,   _______, _______, _______, _______, KC_HOME, KC_PGDN, KC_PGUP,  _______, KC_PSCR, KC_LBRC, \
-    KC_LCTL, KC_HOME, KC_SPC,  KC_DEL,   _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT, KC_END,  KC_QUOT, \ 
+    KC_LCTL, KC_HOME, KC_SPC,  KC_DEL,   _______, _______, _______, _______, KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT, KC_END,  KC_QUOT, \
     KC_LSFT, _______, _______, _______,  _______, KC_BSPC, _______, _______, KC_ENT,  _______, KC_COMM,  KC_DOT,  KC_SLSH, KC_RO    \
-
-),
+   ),
 
   /* SYMB
    * ,------------------------------------------------.   ,------------------------------------------------.

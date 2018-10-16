@@ -20,7 +20,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #pragma once
 
-/* Use I2C or Serial, not both */
+
 
 #define USE_SERIAL
 // #define USE_I2C
@@ -30,4 +30,12 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define MASTER_LEFT
 // #define MASTER_RIGHT
 // #define EE_HANDS
+
+
+#define MOUSEKEY_DELAY              0
+#define MOUSEKEY_IMTERNAL           0
+#define MOUSEKEY_MAX_SPEED         10 
+#define MOUSEKEY_TIME_TO_MAX       20
+#define MOUSEKEY_WHEEL_MAX_SPEED    8
+#define MOUSEKEY_WHEEL_TIME_TO_MAX  4
 
