@@ -117,10 +117,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     JP_EXLM,  JP_AT,   JP_HASH, JP_DLR,  JP_PERC, JP_CIRC, JP_AMPR,   JP_ASTR,  JP_LPRN,   JP_RPRN,     JP_UNDS, JP_PLUS, JP_PIPE, JP_TILD, \
     JP_EXLM,  JP_DQT,  JP_HASH, JP_DLR,  JP_PERC, JP_AMPR, JP_QUOT,   JP_LPRN,  JP_RPRN,   _______,     JP_EQL,  JP_TILD, JP_PIPE, KC_BSPC, \
  */
-    JP_EXLM,  JP_DQT,  JP_HASH, JP_DLR,  JP_PERC, JP_AMPR, JP_QUOT,   JP_LPRN,  JP_RPRN,   _______,     JP_EQL,  JP_CIRC, JP_YEN,  KC_BSPC, \
-    _______,  _______, _______, _______, _______, _______, _______,   KC_GRV,   _______,SFT_T(KC_RO),   _______, JP_AT,   JP_LBRC, JP_RBRC, \
-    _______,  _______, _______, _______, _______, _______, _______,   _______,  _______,   _______,     JP_UNDS, JP_PLUS, JP_BSLS, KC_RSFT, \
-    RESET,    _______, _______, _______, _______, _______, _______,   _______,  _______,   _______,     _______, _______, _______, _______  \
+    KC_BSPC,  JP_EXLM, JP_DQT,  JP_HASH, JP_DLR,  JP_PERC, JP_AMPR,   JP_QUOT,  JP_LPRN,  JP_RPRN,    _______, JP_EQL,  JP_CIRC, JP_YEN,  \
+    _______,  _______, _______, _______, _______, _______, _______,   KC_GRV,   _______,SFT_T(KC_RO), _______, JP_AT,   JP_LBRC, JP_RBRC, \
+    _______,  _______, _______, _______, _______, _______, _______,   _______,  _______,   _______,   JP_UNDS, JP_PLUS, JP_BSLS, KC_RSFT, \
+    RESET,    _______, _______, _______, _______, _______, _______,   _______,  _______,   _______,   _______, _______, _______, _______  \
   )
 
 };
