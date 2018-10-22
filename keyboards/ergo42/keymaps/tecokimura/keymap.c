@@ -42,7 +42,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     LT_MOUS,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,    JP_CIRC,          JP_YEN,     KC_Y,    KC_U,   KC_I,     KC_O,     KC_P,     KC_MINS, \
     KC_LCTRL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,    JP_LPRN,          JP_RPRN,    KC_H,    KC_J,   KC_K,     KC_L,     KC_SCLN,  JP_COLN, \
     KC_LSFT,  KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    JP_LBRC,          JP_RBRC,    KC_N,    KC_M,   KC_COMM,  KC_DOT,   KC_SLSH,  KC_RSFT, \
-    LT_NUMB,  KC_LGUI, KC_LALT, KC_APP,  KC_BSPC, LT_CRSR, LT_FUNC,          LT_NUMB,    LT_CRSR, KC_ENT, _______,  JP_ZHTG,  _______,  LT_FUNC \
+    LT_NUMB,  KC_LGUI, KC_LALT, KC_APP,  KC_BSPC, LT_CRSR, LT_ENT,           KC_BSPC,    LT_CRSR, KC_ENT, _______,  JP_ZHTG,  _______,  LT_FUNC \
   ),
 
   /* LY_CURSOR
@@ -117,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     JP_EXLM,  JP_AT,   JP_HASH, JP_DLR,  JP_PERC, JP_CIRC, JP_AMPR,   JP_ASTR,  JP_LPRN,   JP_RPRN,     JP_UNDS, JP_PLUS, JP_PIPE, JP_TILD, \
     JP_EXLM,  JP_DQT,  JP_HASH, JP_DLR,  JP_PERC, JP_AMPR, JP_QUOT,   JP_LPRN,  JP_RPRN,   _______,     JP_EQL,  JP_TILD, JP_PIPE, KC_BSPC, \
  */
-    KC_BSPC,  JP_EXLM, JP_DQT,  JP_HASH, JP_DLR,  JP_PERC, JP_AMPR,   JP_QUOT,  JP_LPRN,  JP_RPRN,    _______, JP_EQL,  JP_CIRC, JP_YEN,  \
+    KC_GRV,   JP_EXLM, JP_DQT,  JP_HASH, JP_DLR,  JP_PERC, JP_AMPR,   JP_QUOT,  JP_LPRN,  JP_RPRN,    _______, JP_EQL,  JP_CIRC, JP_YEN,  \
     _______,  _______, _______, _______, _______, _______, _______,   KC_GRV,   _______,SFT_T(KC_RO), _______, JP_AT,   JP_LBRC, JP_RBRC, \
     _______,  _______, _______, _______, _______, _______, _______,   _______,  _______,   _______,   JP_UNDS, JP_PLUS, JP_BSLS, KC_RSFT, \
     RESET,    _______, _______, _______, _______, _______, _______,   _______,  _______,   _______,   _______, _______, _______, _______  \

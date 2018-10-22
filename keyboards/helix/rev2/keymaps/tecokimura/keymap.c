@@ -41,6 +41,14 @@ enum layer_number {
   _RFN,
 };
 
+enum my_layer_number {
+  _LY_NORMAL =0,
+  _LY_CURSOR,
+  _LY_MOUSE,
+  _LY_NUMBER,
+  _LY_FUNC,
+};
+
 enum custom_keycodes {
   BASE = SAFE_RANGE,
   LOWER,
@@ -114,11 +122,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `-------------------------------------------------------------------------------------------------'
    */
   [_LOWER] = LAYOUT( \
-    KC_ESC,  _______, _______,   _______, _______, KC_BSPC,                 XXXXXXX, XXXXXXX, XXXXXXX, KC_MINS, JP_CFTD, JP_BSVL, \
-    KC_LPRN, KC_RPRN, KC_SLSH,   KC_7,    KC_8,    KC_9,                    KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, JP_ATBQ, JP_LBRC, \
-    JP_LBRC, JP_RBRC, KC_ASTR,   KC_4,    KC_5,    KC_6,                    KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, JP_CLAS, JP_RBRC, \
-    KC_LCBR, KC_RCBR, KC_MINS,   KC_1,    KC_2,    KC_3,   KC_TAB, XXXXXXX, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_BTN5, JP_BSUS, \
-    _______, _______, KC_PLUS,   KC_0,    KC_COMM, KC_DOT, KC_ENT, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  \
+    KC_ESC,  _______, _______, _______, _______, _______,                      XXXXXXX, XXXXXXX, XXXXXXX, KC_MINS, JP_CFTD, JP_BSVL, \
+    _______, _______, _______, KC_ENT,  _______, KC_TAB,                       _______, KC_7,    KC_8,    KC_9,    KC_MINS, KC_EQL,  \
+    _______, _______, KC_SPC,  KC_DEL,  _______, _______,                      KC_BSPC, KC_4,    KC_5,    KC_6,    JP_PLUS, JP_ASTR, \
+    _______, KC_UNDO, KC_CUT,  KC_COPY, KC_PASTE,KC_BSPC, _______,    _______, KC_0,    KC_1,    KC_2,    KC_3,    KC_SLSH, _______,\
+    _______, _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, KC_DOT,  _______  \
     ),
 
   /* Raise JIS Normal
@@ -156,11 +164,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * `-------------------------------------------------------------------------------------------------'
    */
   [_ADJUST] =  LAYOUT( \
-    RESET,   _______, _______,   _______, _______, KC_BSPC,                 XXXXXXX, XXXXXXX, XXXXXXX, KC_MINS, JP_CFTD, JP_BSVL, \
-    KC_LPRN, KC_RPRN, KC_SLSH,   KC_7,    KC_8,    KC_9,                    KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, JP_ATBQ, JP_LBRC, \
-    JP_LBRC, JP_RBRC, KC_ASTR,   KC_4,    KC_5,    KC_6,                    KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, JP_CLAS, JP_RBRC, \
-    KC_LCBR, KC_RCBR, KC_MINS,   KC_1,    KC_2,    KC_3,   KC_TAB, XXXXXXX, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_BTN5, JP_BSUS, \
-    _______, _______, KC_PLUS,   KC_0,    KC_COMM, KC_DOT, KC_ENT, _______, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX  \
+    RESET,   _______, _______, _______, _______, KC_BSPC,                      XXXXXXX, XXXXXXX, XXXXXXX, KC_MINS, JP_CFTD, JP_BSVL, \
+    _______, KC_BTN1, KC_BTN2, _______, KC_TAB,  XXXXXXX,                      KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, JP_ATBQ, JP_LBRC, \
+    KC_LCTL, KC_VOLU, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, JP_CLAS, JP_RBRC, \
+    KC_LSFT, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,      _______, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_BTN5, JP_BSUS, \
+    _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,     _______, _______, _______, _______, _______, _______, _______ \
     ),
 
   /* _RFN Common map for Normal and Exchange
