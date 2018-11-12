@@ -14,6 +14,8 @@
   #include "ssd1306.h"
 #endif
 
+#include "keymap_jp.h"
+
 // * If you want to recognize that you pressed the Adjust key with the Lower / Raise key you can enable this comment out. However, the binary size may be over. *
 // #define ADJUST_MACRO_ENABLE
 
@@ -62,15 +64,6 @@ enum custom_keycodes {
   RGBRST
 };
 
-// JIS key aliases
-#define JP_CFTD KC_EQL   // ^ and ~ Circumflex (Hat) and Tilde
-#define JP_ATBQ KC_LBRC  // @ and ` Atmark and Back-quote
-#define JP_CLAS KC_QUOT  // : and * Colon and Asterisk
-#define JP_BSVL KC_JYEN  // \ and | Back slash and and Vertical-line)
-#define JP_LBRC KC_RBRC  // [ and { Left-bracket
-#define JP_RBRC KC_BSLS  // ] and } Right-bracket
-#define JP_BSUS KC_RO    // \ and _ Back slash and Under-score
-
 // Fillers to make layering more clear
 #define _______ KC_TRNS
 #define XXXXXXX KC_NO
@@ -84,49 +77,40 @@ enum custom_keycodes {
 #define LT_TAB  LT(ADJUST, KC_TAB)
 #define LT_LFN  LT(LOWER,  KC_ESC)
 
+// written by tecokimura
+#define LY_NORMAL 0  // base
+#define LY_CURSOR 1  // lower
+#define LY_MOUSE  2  // raise
+#define LY_NUMBER 3  // adjust
+#define LY_FUNC   4  // rfn
+
+#define LT_CRSR  LT(LY_CURSOR, KC_SPC)
+#define LT_MOUS  LT(LY_MOUSE,  KC_TAB)
+#define LT_NUMB  LT(LY_NUMBER, KC_ESC)
+#define LT_FUNC  LT(LY_FUNC,   _______)
+
 
 #if HELIX_ROWS == 5
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   /* Qwerty JIS Normal
    * ,-----------------------------------------.             ,-----------------------------------------.
-   * | Esc  |  1!  |  2"  |  3#  |  4$  |  5%  |             |  6&  |  7'  |  8(  |  9)  |   0  |  -=  |
+   * | ESC  |  1!  |  2"  |  3#  |  4$  |  5%  |             |  6&  |  7'  |  8(  |  9)  |   0  |  -=  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * | Tab  |   Q  |   W  |   E  |   R  |   T  |             |   Y  |   U  |   I  |   O  |   P  |  @`  |
+   * | !MOUS|   Q  |   W  |   E  |   R  |   T  |             |   Y  |   U  |   I  |   O  |   P  |  @`  |
    * |------+------+------+------+------+------|             |------+------+------+------+------+------|
    * | Ctrl |   A  |   S  |   D  |   F  |   G  |             |   H  |   J  |   K  |   L  |  ;+  |  :*  |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * | Shift|   Z  |   X  |   C  |   V  |   B  |Adjust| EISU |   N  |   M  |  ,<  |  .>  |  /?  |  \_  |
+   * | Shift|   Z  |   X  |   C  |   V  |   B  |!CRSR | EISU |   N  |   M  |  ,<  |  .>  |  /?  |  \_  |
    * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * | Lower| GUI  | Alt  | Ctrl | Bksp |Space |Enter |RAISE |Space |Enter | APP  | Left | Down |Shift |
+   * | !NUMB| GUI  | Alt  | Ctrl | Bksp |Space |Enter |RAISE |Space |Enter | APP  | Left | Down |Shift |
    * `-------------------------------------------------------------------------------------------------'
    */
-  [_BASE] = LAYOUT( \
+  [_LY_NORMAL] = LAYOUT( \
     KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,    KC_MINS, \
-    LT_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    JP_ATBQ, \
-    KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, JP_CLAS, \
-    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    ADJUST,  EISU,    KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, JP_BSUS, \
-    LOWER,   KC_LALT, KC_LGUI, KC_LCTL, KC_BSPC, KC_SPC,  KC_ENT,  RAISE,   LT_SPC,  KC_ENT,  KC_APP,  RFN,     XXXXXXX, KC_RSFT  \
-    ),
-
-  /* Lower JIS Normal
-   * ,-----------------------------------------.             ,-----------------------------------------.
-   * |  ESC |      |      |      |      | Bksp |             |      |      |      |  -=  |  ^~  |  \|  |
-   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |   (  |   )  |   /  |   7  |   8  |   9  |             |WheelL|WheelD|WheelU|WheelR|  @`  |  [{  |
-   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
-   * |   [  |   ]  |   *  |   4  |   5  |   6  |             |MouseL|MouseD|MouseU|MouseR|  :*  |  ]}  |
-   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * |   {  |   }  |   -  |   1  |   2  |   3  |  Tab |      |Click1|Click2|Click3|Click4|Click5|  \_  |
-   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
-   * |      |      |   +  |   0  |   ,  |   .  | Enter|      |      |      |      |      |      |      |
-   * `-------------------------------------------------------------------------------------------------'
-   */
-  [_LOWER] = LAYOUT( \
-    KC_ESC,  _______, _______, _______, _______, _______,                      XXXXXXX, XXXXXXX, XXXXXXX, KC_MINS, JP_CFTD, JP_BSVL, \
-    _______, _______, _______, KC_ENT,  _______, KC_TAB,                       _______, KC_7,    KC_8,    KC_9,    KC_MINS, KC_EQL,  \
-    _______, _______, KC_SPC,  KC_DEL,  _______, _______,                      KC_BSPC, KC_4,    KC_5,    KC_6,    JP_PLUS, JP_ASTR, \
-    _______, KC_UNDO, KC_CUT,  KC_COPY, KC_PASTE,KC_BSPC, _______,    _______, KC_0,    KC_1,    KC_2,    KC_3,    KC_SLSH, _______,\
-    _______, _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, KC_DOT,  _______  \
+    LT_MOUS, KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,                      KC_Y,    KC_U,    KC_I,    KC_O,    KC_P,    JP_AT, \
+    KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,                      KC_H,    KC_J,    KC_K,    KC_L,    KC_SCLN, JP_COLN, \
+    KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,    LT_CRSR, _______, KC_N,    KC_M,    KC_COMM, KC_DOT,  KC_SLSH, JP_BSLS, \
+    LT_NUMB, KC_LGUI, KC_LALT, KC_APP,  KC_BSPC, KC_SPC,  KC_ENT,  KC_BSPC, LT_CRSR, KC_ENT,  _______, JP_ZHTG, _______, LT_FUNC \
     ),
 
   /* Raise JIS Normal
@@ -142,12 +126,12 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |      |      |      |      |      |      |      |      |      |      |      |MsLeft|MsDown|MsRght|
    * `-------------------------------------------------------------------------------------------------'
    */
-  [_RAISE] = LAYOUT( \
-    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                     _______, XXXXXXX,      XXXXXXX,   XXXXXXX,    XXXXXXX, KC_DEL,  \
-    KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,                    KC_HOME, KC_PGDN,      KC_PGUP,   KC_END,     _______, KC_BSPC, \
-    KC_LCTL, KC_HOME, KC_SPC,  KC_DEL,  XXXXXXX, XXXXXXX,                   KC_LEFT, KC_DOWN,      KC_UP,     KC_RIGHT,   KC_END,  KC_ENT, \
-    _______, KC_BTN1, KC_BTN2, XXXXXXX, XXXXXXX, KC_BSPC, XXXXXXX, XXXXXXX, KC_ENT,  MAC_HEN_EISU, MAC_IMEON, MAC_IMEOFF, KC_MS_U, XXXXXXX, \
-    _______, _______, _______, _______, XXXXXXX, XXXXXXX, _______, _______, XXXXXXX, XXXXXXX,      XXXXXXX,   KC_MS_L,    KC_MS_D, KC_MS_R  \
+  [_LY_CURSOR] = LAYOUT( \
+    KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,                        _______, XXXXXXX, XXXXXXX,  XXXXXXX, XXXXXXX, KC_DEL,  \
+    _______, _______, _______, KC_END,  _______, KC_TAB,                       _______, KC_PGDN, KC_PGUP,  KC_HOME, KC_PSCR, KC_BSPC, \
+    KC_LCTL, KC_HOME, KC_SPC,  KC_DEL,  _______, _______,                      KC_LEFT, KC_DOWN, KC_UP,    KC_RGHT, KC_END,  KC_QUOT, \
+    KC_LSFT, _______, _______, _______, _______, KC_BSPC, _______,    _______, KC_ENT,  KC_ENT,  _______,  _______, KC_SLSH, KC_RO,   \
+    _______, _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______,  _______, _______, _______ \
     ),
 
   /* Adjust (Lower + Raise) Common map for Normal and Exchange
@@ -163,13 +147,34 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |      |      |   +  |   0  |   ,  |   .  | Enter|      |      |      |      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
-  [_ADJUST] =  LAYOUT( \
-    RESET,   _______, _______, _______, _______, KC_BSPC,                      XXXXXXX, XXXXXXX, XXXXXXX, KC_MINS, JP_CFTD, JP_BSVL, \
-    _______, KC_BTN1, KC_BTN2, _______, KC_TAB,  XXXXXXX,                      KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, JP_ATBQ, JP_LBRC, \
-    KC_LCTL, KC_VOLU, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, JP_CLAS, JP_RBRC, \
-    KC_LSFT, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,      _______, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, KC_BTN5, JP_BSUS, \
+  [_LY_MOUSE] = LAYOUT( \
+    RESET,   _______, _______, _______, _______, KC_BSPC,                      XXXXXXX, XXXXXXX, XXXXXXX, KC_MINS, _______, _______, \
+    _______, KC_BTN1, KC_BTN2, _______, KC_TAB,  XXXXXXX,                      KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, _______, _______, \
+    KC_LCTL, KC_VOLU, KC_MUTE, KC_VOLU, XXXXXXX, XXXXXXX,                      KC_MS_L, KC_MS_D, KC_MS_U, KC_MS_R, _______, _______, \
+    KC_LSFT, KC_F1,   KC_F2,   KC_F3,   KC_F4,   KC_F5,   KC_F6,      _______, KC_BTN1, KC_BTN2, KC_BTN3, KC_BTN4, _______, _______, \
     _______, KC_F7,   KC_F8,   KC_F9,   KC_F10,  KC_F11,  KC_F12,     _______, _______, _______, _______, _______, _______, _______ \
-    ),
+  ),
+
+  /* Lower JIS Normal
+   * ,-----------------------------------------.             ,-----------------------------------------.
+   * |  ESC |      |      |      |      | Bksp |             |      |      |      |  -=  |  ^~  |  \|  |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * |   (  |   )  |   /  |   7  |   8  |   9  |             |WheelL|WheelD|WheelU|WheelR|  @`  |  [{  |
+   * |------+------+------+------+------+------|             |------+------+------+------+------+------|
+   * |   [  |   ]  |   *  |   4  |   5  |   6  |             |MouseL|MouseD|MouseU|MouseR|  :*  |  ]}  |
+   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
+   * |   {  |   }  |   -  |   1  |   2  |   3  |  Tab |      |Click1|Click2|Click3|Click4|Click5|  \_  |
+   * |------+------+------+------+------+------+------+------+------+------+------+------+------+------|
+   * |      |      |   +  |   0  |   ,  |   .  | Enter|      |      |      |      |      |      |      |
+   * `-------------------------------------------------------------------------------------------------'
+   */
+  [_LY_NUMBER] = LAYOUT( \
+    KC_ESC,  _______, _______, _______, _______, _______,                      XXXXXXX, XXXXXXX, XXXXXXX, KC_MINS, _______, _______, \
+    _______, _______, _______, KC_ENT,  _______, KC_TAB,                       _______, KC_7,    KC_8,    KC_9,    KC_MINS, KC_EQL,  \
+    _______, _______, KC_SPC,  KC_DEL,  _______, _______,                      KC_BSPC, KC_4,    KC_5,    KC_6,    JP_PLUS, JP_ASTR, \
+    _______, KC_UNDO, KC_CUT,  KC_COPY, KC_PASTE,KC_BSPC, _______,    _______, KC_0,    KC_1,    KC_2,    KC_3,    KC_SLSH, _______, \
+    _______, _______, _______, _______, _______, _______, _______,    _______, _______, _______, _______, _______, KC_DOT,  _______  \
+  ),
 
   /* _RFN Common map for Normal and Exchange
    * ,-----------------------------------------.             ,-----------------------------------------.
@@ -184,13 +189,13 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |      |      |      |      |      |      |      |      |      |      |      |      |      |      |
    * `-------------------------------------------------------------------------------------------------'
    */
-  [_RFN] =  LAYOUT( \
+  [_LY_FUNC] =  LAYOUT( \
     RESET,   XXXXXXX, RGBRST,  AU_ON,   AU_OFF,  XXXXXXX,                   XXXXXXX, RESET,   RGBRST,  AU_ON,   AU_OFF,  XXXXXXX, \
-    XXXXXXX, BASE,    XXXXXXX, AG_NORM, AG_SWAP, XXXXXXX,                   XXXXXXX, BASE,    XXXXXXX,   AG_NORM, AG_SWAP, XXXXXXX, \
+    XXXXXXX, BASE,    XXXXXXX, AG_NORM, AG_SWAP, XXXXXXX,                   XXXXXXX, BASE,    XXXXXXX, AG_NORM, AG_SWAP, XXXXXXX, \
     XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX,                   XXXXXXX, RGB_TOG, RGB_HUI, RGB_SAI, RGB_VAI, XXXXXXX, \
     XXXXXXX, RGB_SMOD,RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, RGB_SMOD,RGB_HUD, RGB_SAD, RGB_VAD, XXXXXXX, \
     _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______, _______  \
-    ),
+    )
 
 };
 
