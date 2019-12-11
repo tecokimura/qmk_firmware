@@ -4,16 +4,16 @@
 
 #define _______ KC_TRNS
 
-#define LY_NRML 0
+#define LY_NRML  0
 #define LY_CRSR  1
 #define LY_MOUS  2
 #define LY_NUMB  3
 #define LY_FUNC  4
 
 #define LT_CRSR  LT(LY_CRSR, KC_SPC)
-#define LT_TAB  LT(LY_MOUS, KC_TAB) 
-#define LT_LFN  LT(LY_NUMB, KC_ESC) 
-#define LT_RFN  LT(LY_FUNC, _______) 
+#define LT_TAB   LT(LY_MOUS, KC_TAB) 
+#define LT_LFN   LT(LY_NUMB, KC_ESC) 
+#define LT_RFN   LT(LY_FUNC, _______) 
 
 #define MOUSEKEY_DELAY       5 
 #define MOUSEKEY_INTERVAL    3 
@@ -54,9 +54,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     [LY_NRML] = LAYOUT_JP(
         KC_ESC,  KC_1,    KC_2,    KC_3,    KC_4,    KC_5,   KC_6,    KC_7,    KC_8,    KC_9,   KC_0,    KC_MINS, KC_EQL,  KC_BSLS, KC_GRAVE,
         LT_TAB,  KC_Q,    KC_W,    KC_E,    KC_R,    KC_T,   KC_Y,    KC_U,    KC_I,    KC_O,   KC_P,    KC_LBRC, KC_RBRC,
-        KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,   KC_H,    KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT, KC_BSLS,     KC_ENT,
-        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RO,   KC_UP,   KC_RSFT,
-   LT_LFN, KC_ZKHK, KC_LGUI, KC_LALT, KC_BSPC,      LY_CRSR,        KC_ENT,  KC_KANA, KC_RALT, LT_RFN,   KC_LEFT, KC_DOWN, KC_RGHT),
+        KC_LCTL, KC_A,    KC_S,    KC_D,    KC_F,    KC_G,   KC_H,    KC_J,    KC_K,    KC_L,   KC_SCLN, KC_QUOT, KC_ENT,     KC_ENT,
+        KC_LSFT, KC_Z,    KC_X,    KC_C,    KC_V,    KC_B,   KC_N,    KC_M,    KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,   KC_UP,   KC_RO,
+   LT_LFN, KC_ZKHK, KC_LGUI, KC_LALT, KC_BSPC,      LT_CRSR,        KC_ENT,  KC_KANA, KC_RALT, LT_RFN,   KC_LEFT, KC_DOWN, KC_RGHT),
 
     [LY_CRSR] = LAYOUT_JP(
         JP_ZHTG,  _______, _______, _______, _______, _______, _______, _______, _______, _______, KC_HOME, KC_MINS, KC_EQL,  KC_JYEN, KC_BSPC,
