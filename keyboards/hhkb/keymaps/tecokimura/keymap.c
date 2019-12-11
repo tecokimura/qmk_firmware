@@ -10,7 +10,7 @@
 #define LY_NUMB  3
 #define LY_FUNC  4
 
-#define LY_CRSR  LT(LY_CRSR, KC_SPC)
+#define LT_CRSR  LT(LY_CRSR, KC_SPC)
 #define LT_TAB  LT(LY_MOUS, KC_TAB) 
 #define LT_LFN  LT(LY_NUMB, KC_ESC) 
 #define LT_RFN  LT(LY_FUNC, _______) 
